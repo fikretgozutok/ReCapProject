@@ -4,6 +4,8 @@ using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Linq;
+using System.Linq.Expressions;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -33,14 +35,29 @@ namespace DataAccess.Concrete.InMemory
             cars.Remove(carToDelete);
         }
 
-        public List<Car> GetAll()
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            return cars[0];
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             return cars;
+        }
+
+        public List<Car> GetAllData()
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetById(int Id)
         {
             return cars.Where(c=>c.Id == Id).ToList();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
