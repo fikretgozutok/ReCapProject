@@ -42,7 +42,7 @@ namespace ConsoleUI
             }
             Console.WriteLine(carManager.GetById(1).Description);*/
 
-            List<CarDetailDto> list = carManager.GetCarDetais();
+            List<CarDetailDto> list = carManager.GetCarDetais().Data;
             //Console.WriteLine(list.Count);
             foreach (var item in list)
             {

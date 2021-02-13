@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Entities.Concrete;
+using Core.Utilities.Results.Abstract;
 
 namespace Business
 {
     public interface IModelNameService
     {
-        void Add(ModelName modelName);
-        void Update(ModelName modelName);
-        void Delete(ModelName modelName);
-        List<ModelName> GetAll();
-        ModelName Get(int modelNameId);
-        List<ModelName> GetByBrandId(int brandId);
+        IResult Add(ModelName modelName);
+        IResult Update(ModelName modelName);
+        IResult Delete(ModelName modelName);
+        IDataResult<List<ModelName>> GetAll();
+        IDataResult<ModelName> Get(int modelNameId);
+        IDataResult<List<ModelName>> GetByBrandId(int brandId);
     }
 }

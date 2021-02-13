@@ -3,6 +3,8 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 
 namespace Business.Concrete
 {
@@ -14,34 +16,37 @@ namespace Business.Concrete
             _modelNameDal = modelNameDal;
         }
 
-        public void Add(ModelName modelName)
+        public IResult Add(ModelName modelName)
         {
             _modelNameDal.Add(modelName);
+            return new SuccessResult();
         }
 
-        public void Delete(ModelName modelName)
+        public IResult Delete(ModelName modelName)
         {
             _modelNameDal.Delete(modelName);
+            return new SuccessResult();
         }
 
-        public ModelName Get(int modelNameId)
+        public IDataResult<ModelName> Get(int modelNameId)
         {
-            return _modelNameDal.Get(mn=>mn.Id == modelNameId);
+            return new SuccessDataResult<ModelName>(_modelNameDal.Get(mn=>mn.Id == modelNameId));
         }
 
-        public List<ModelName> GetAll()
+        public IDataResult<List<ModelName>> GetAll()
         {
-            return _modelNameDal.GetAll();
+            return new SuccessDataResult<List<ModelName>>(_modelNameDal.GetAll());
         }
 
-        public List<ModelName> GetByBrandId(int brandId)
+        public IDataResult<List<ModelName>> GetByBrandId(int brandId)
         {
-            return _modelNameDal.GetAll(mn=>mn.BrandId == brandId);
+            return new SuccessDataResult<List<ModelName>>(_modelNameDal.GetAll(mn=>mn.BrandId == brandId));
         }
 
-        public void Update(ModelName modelName)
+        public IResult Update(ModelName modelName)
         {
             _modelNameDal.Update(modelName);
+            return new SuccessResult();
         }
     }
 }
