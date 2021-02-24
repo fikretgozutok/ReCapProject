@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Core.Entities;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Core.Entities;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
-        where TEntity : class, IEntity, new()
-        where TContext : DbContext, new()
+    public class EfEntityRepositoryBase<Tentity, Tcontext> : IEntityRepository<Tentity>
+        where Tentity : class, IEntity, new()
+        where Tcontext : DbContext, new()
     {
-        public void Add(TEntity entity)
+        public void Add(Tentity entity)
         {
-            using (TContext context = new TContext())
+            using (Tcontext context = new Tcontext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
@@ -22,9 +24,9 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(Tentity entity)
         {
-            using (TContext context = new TContext())
+            using (Tcontext context = new Tcontext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -32,27 +34,27 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public Tentity Get(Expression<Func<Tentity, bool>> filter)
         {
-            using (TContext context = new TContext())
+            using (Tcontext context = new Tcontext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+                return context.Set<Tentity>().SingleOrDefault(filter);
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public List<Tentity> GetAll(Expression<Func<Tentity, bool>> filter = null)
         {
-            using (TContext context = new TContext())
+            using (Tcontext context = new Tcontext())
             {
                 return filter == null
-                    ? context.Set<TEntity>().ToList()
-                    : context.Set<TEntity>().Where(filter).ToList();
+                    ? context.Set<Tentity>().ToList()
+                    : context.Set<Tentity>().Where(filter).ToList();
             }
         }
 
-        public void Update(TEntity entity)
+        public void Update(Tentity entity)
         {
-            using (TContext context = new TContext())
+            using (Tcontext context = new Tcontext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;

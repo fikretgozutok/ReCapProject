@@ -8,8 +8,8 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class ColorManager<Dal> : BusinessManagerBase<Color, Dal>, IColorService
-        where Dal : class, IEntityRepository<Color>, new()
+    public class CustomerManager<Dal> : BusinessManagerBase<Customer, Dal>, ICustomerService
+        where Dal : class, IEntityRepository<Customer>, new()
     {
     }
 }

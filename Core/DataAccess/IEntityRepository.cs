@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Core.Entities;
+using Core.Utilities.Results.Abstract;
 
 namespace Core.DataAccess
 {
@@ -11,8 +12,7 @@ namespace Core.DataAccess
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);
-        List<T> GetAll(Expression<Func<T,bool>> filter = null);
-        T Get(Expression<Func<T,bool>> filter);
-
+        List<T> GetAll(Expression<Func<T, bool>> filter = null);
+        T Get(Expression<Func<T, bool>> filter);
     }
 }

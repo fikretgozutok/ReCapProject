@@ -7,9 +7,11 @@ namespace Entities.DTOs
 {
     public class CarDetailDto : IDto
     {
-        public string ModelName { get; set; }
-        public string BrandName { get; set; }
-        public string ColorName { get; set; }
+        public int Id { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
+        public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public string Description { get; set; }
     }

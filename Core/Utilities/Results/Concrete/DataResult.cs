@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Core.Utilities.Results.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.Utilities.Results.Abstract;
 
 namespace Core.Utilities.Results.Concrete
 {
     public class DataResult<T> : Result, IDataResult<T>
     {
-        public T Data { get; }
+        public T Data { get; set; }
 
-        public DataResult(bool success, string message, T data) : base(success,message)
+        public DataResult(bool success, string message, T data):base(success, message)
         {
-            this.Data = data;
+            Data = data;
         }
 
-        public DataResult(bool success, T data) : base(success)
+        public DataResult(bool success, T data):base(success)
         {
-            this.Data = data;
+            Data = data;
         }
     }
 }
