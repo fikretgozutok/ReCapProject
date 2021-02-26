@@ -9,15 +9,15 @@ using System.Linq.Expressions;
 
 namespace Core.Business
 {
-    public class BusinessManagerBase<Tentity, Tdal> : IBusinessService<Tentity>
+    public class BusinessManagerBase<Tentity> : IBusinessService<Tentity>
         where Tentity : class, IEntity, new()
-        where Tdal : class, IEntityRepository<Tentity>, new()
     {
         protected IEntityRepository<Tentity> _entityDal;
 
-        public BusinessManagerBase()
+        
+        public BusinessManagerBase(IEntityRepository<Tentity> entityDal)
         {
-            _entityDal = new Tdal();
+            _entityDal = entityDal;
         }
 
         public virtual IResult Add(Tentity entity)

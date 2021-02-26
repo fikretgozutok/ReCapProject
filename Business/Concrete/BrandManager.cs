@@ -5,11 +5,16 @@ using System.Text;
 using Core.Business;
 using Entities.Concrete;
 using Core.DataAccess;
+using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
-    public class BrandManager<Dal> : BusinessManagerBase<Brand, Dal>, IBrandService
-        where Dal: class, IEntityRepository<Brand>, new()
+    public class BrandManager : BusinessManagerBase<Brand>, IBrandService
     {
+        private IBrandDal _brandDal;
+        public BrandManager(IBrandDal brandDal):base(brandDal)
+        {
+            _brandDal = brandDal;
+        }
     }
 }

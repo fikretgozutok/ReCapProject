@@ -9,16 +9,14 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Results.Concrete;
 using Core.Business;
-using Core.DataAccess;
 
 
 namespace Business.Concrete
 {
-    public class CarManager<Dal> : BusinessManagerBase<Car, Dal>, ICarService
-        where Dal : class, IEntityRepository<Car>, new()
+    public class CarManager : BusinessManagerBase<Car>, ICarService
     {
         private ICarDal _carDal;
-        public CarManager()
+        public CarManager(ICarDal carDal):base(carDal)
         {
             _carDal = (ICarDal)_entityDal;
         }
@@ -34,7 +32,7 @@ namespace Business.Concrete
             
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int carId)
+        public IDataResult<List<CarDetailDto>> GetCarDetails(int carId)
         {
             try
             {
@@ -72,7 +70,7 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarsDetails()
+        public IDataResult<List<CarDetailDto>> GetAllCarsDetails()
         {
             try
             {

@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Core.Business;
-using Core.DataAccess;
 using Core.Utilities.Results.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -14,14 +13,13 @@ using Entities.DTOs;
 
 namespace Business.Concrete
 {
-    public class RentalManager<Dal> : BusinessManagerBase<Rental, Dal>, IRentalService
-        where Dal : class, IEntityRepository<Rental>, new()
+    public class RentalManager : BusinessManagerBase<Rental>, IRentalService
     {
         private IRentalDal _rentalDal;
 
-        public RentalManager()
+        public RentalManager(IRentalDal rentalDal):base(rentalDal)
         {
-            _rentalDal = (IRentalDal)_entityDal;
+            _rentalDal = rentalDal;
         }
 
         public IDataResult<List<RentalDetailDto>> GetAllRentalsDetails()
@@ -32,7 +30,7 @@ namespace Business.Concrete
             }
             catch (Exception e)
             {
-                return new ErrorDataResult<List<RentalDetailDto>>();
+                return new ErrorDataResult<List<RentalDetailDto>>(e.Message);
             }
         }
 
@@ -44,7 +42,7 @@ namespace Business.Concrete
             }
             catch (Exception e)
             {
-                return new ErrorDataResult<List<RentalDetailDto>>();
+                return new ErrorDataResult<List<RentalDetailDto>>(e.Message);
             }
         }
 

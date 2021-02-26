@@ -20,7 +20,7 @@ namespace ConsoleUI
 
         static void AddNewUser()
         {
-            UserManager<EfUserDal> userManager = new UserManager<EfUserDal>();
+            UserManager userManager = new UserManager(new EfUserDal());
             userManager.Add(new User 
             {
                 FirstName = "Fikret",
@@ -45,7 +45,7 @@ namespace ConsoleUI
         }
         static void AddNewCustomer()
         {
-            CustomerManager<EfCustomerDal> customerManager = new CustomerManager<EfCustomerDal>();
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             customerManager.Add(new Customer 
             {
                 UserId = 2,
@@ -54,7 +54,7 @@ namespace ConsoleUI
         }
         static void RentSystem()
         {
-            RentalManager<EfRentalDal> rentalManager = new RentalManager<EfRentalDal>();
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
             /*var res = rentalManager.RentCar(new Rental
             {
                 CarId = 8,
