@@ -13,5 +13,6 @@ namespace Business.Constants
         public static string nameError = "Model isminin uzunluğu minimum iki karakter olmalıdır.";
         public static string notReturnedYet = "Araç şuan kiralanmış durumdadır. Lütfen daha sonra tekrar deneyiniz.";
         public static string notRented = "Girilen bilgiler ile eşleşen bir kiralama verisi bulunmaktadır.";
+        public static string imageLimitExceeded = "Seçili araç için yüklenebilecek resim limitine ulaştınız.";
     }
 }

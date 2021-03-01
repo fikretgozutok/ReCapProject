@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Business;
 using Core.Utilities.Results.Abstract;
 using DataAccess.Abstract;
@@ -19,15 +20,9 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public override IResult Add(Color entity)
         {
-            var context = new ValidationContext<Color>(entity);
-            ColorValidator colorValidator = new ColorValidator();
-            var result = colorValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
             return base.Add(entity);
         }
     }

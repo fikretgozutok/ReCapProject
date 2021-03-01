@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
+using System.IO;
+using Core.Entities.Concrete;
+using Business.Abstract;
 
 namespace ConsoleUI
 {
@@ -14,14 +17,25 @@ namespace ConsoleUI
         {
             //AddNewUser();
             //AddNewCustomer();
-            RentSystem();
+            //RentSystem();
+            ICarService carService = new CarManager(new EfCarDal());
+            var res = carService.Add(new Car
+            {
+                BrandId = 1,
+                ColorId = 1,
+                DailyPrice = 300,
+                Description = "temiz otomatik vites",
+                ModelId = 1,
+                ModelYear = 2014
+            });
+            Console.WriteLine(res.Success);
             Console.ReadLine();
         }
 
         static void AddNewUser()
         {
             UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User 
+            userManager.Add(new User
             {
                 FirstName = "Fikret",
                 LastName = "Gözütok",
@@ -46,7 +60,7 @@ namespace ConsoleUI
         static void AddNewCustomer()
         {
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            customerManager.Add(new Customer 
+            customerManager.Add(new Customer
             {
                 UserId = 2,
                 CompanyName = "Demir Tekstil"
@@ -79,7 +93,7 @@ namespace ConsoleUI
 
             foreach (var item in res.Data)
             {
-                Console.WriteLine("Id = {0}",item.Id);
+                Console.WriteLine("Id = {0}", item.Id);
                 Console.WriteLine("Araç Id = {0}", item.CarId);
                 Console.WriteLine("Müşteri İsmi = {0}", item.CustomerName);
                 Console.WriteLine("Müşteri Soyismi = {0}", item.CustomerSurname);
