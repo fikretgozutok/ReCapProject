@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Results.Concrete;
 using Core.Business;
-
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -21,15 +22,23 @@ namespace Business.Concrete
             _carDal = (ICarDal)_entityDal;
         }
 
+
+        [ValidationAspect(typeof(CarValidator))]
         public override IResult Add(Car entity)
         {
-            if (entity.DailyPrice > 0)
-            {
-                return base.Add(entity);
-            }
+            return base.Add(entity);
+        }
 
-            return new ErrorDataResult<Car>(Messages.priceError);
-            
+        [ValidationAspect(typeof(CarValidator))]
+        public override IResult Update(Car entity)
+        {
+            return base.Update(entity);
+        }
+
+        [ValidationAspect(typeof(CarValidator))]
+        public override IResult Delete(Car entity)
+        {
+            return base.Delete(entity);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails(int carId)

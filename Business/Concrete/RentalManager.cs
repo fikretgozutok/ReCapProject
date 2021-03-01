@@ -10,6 +10,8 @@ using System.Linq;
 using Core.Utilities.Results.Concrete;
 using Business.Constants;
 using Entities.DTOs;
+using Core.Aspects.Autofac.Validation;
+using Business.ValidationRules.FluentValidation;
 
 namespace Business.Concrete
 {
@@ -19,7 +21,25 @@ namespace Business.Concrete
 
         public RentalManager(IRentalDal rentalDal):base(rentalDal)
         {
-            _rentalDal = rentalDal;
+            _rentalDal = (IRentalDal)base._entityDal;
+        }
+
+        [ValidationAspect(typeof(RentalValidator))]
+        public override IResult Add(Rental entity)
+        {
+            return base.Add(entity);
+        }
+
+        [ValidationAspect(typeof(RentalValidator))]
+        public override IResult Update(Rental entity)
+        {
+            return base.Update(entity);
+        }
+
+        [ValidationAspect(typeof(RentalValidator))]
+        public override IResult Delete(Rental entity)
+        {
+            return base.Delete(entity);
         }
 
         public IDataResult<List<RentalDetailDto>> GetAllRentalsDetails()
