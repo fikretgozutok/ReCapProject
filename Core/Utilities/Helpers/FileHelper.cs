@@ -10,8 +10,6 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
-        //First Value is File Name
-        //Second Value is File New Path
         public static string GetPathandName(IFormFile file)
         {
             FileInfo fileInfo = new FileInfo(file.FileName);
