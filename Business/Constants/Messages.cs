@@ -14,5 +14,6 @@ namespace Business.Constants
         public static string notReturnedYet = "Araç şuan kiralanmış durumdadır. Lütfen daha sonra tekrar deneyiniz.";
         public static string notRented = "Girilen bilgiler ile eşleşen bir kiralama verisi bulunmaktadır.";
         public static string imageLimitExceeded = "Seçili araç için yüklenebilecek resim limitine ulaştınız.";
+        internal static string fetchError = "Veriyi getirmekte sıkıntı yaşandı.";
     }
 }

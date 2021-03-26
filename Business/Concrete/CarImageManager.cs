@@ -86,7 +86,18 @@ namespace Business.Concrete
             }
         }
 
-
+        public IDataResult<List<CarImage>> GetByCarId(int carId)
+        {
+            try
+            {
+                var res = _entityDal.GetAll(c => c.CarId == carId);
+                return new SuccessDataResult<List<CarImage>>(res);
+            }
+            catch (Exception e)
+            {
+                return new ErrorDataResult<List<CarImage>>(Messages.fetchError);
+            }
+        }
 
         //BusinessRules
         public IResult IsImageLimitExceeded(int carId)
@@ -126,7 +137,7 @@ namespace Business.Concrete
                     CarId = carId,
                     Date = DateTime.Now,
                     ImagePath = FileHelper.DefaultPath()
-                });;
+                }); ;
             }
 
             return new SuccessResult();
