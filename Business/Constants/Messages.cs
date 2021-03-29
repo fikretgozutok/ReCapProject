@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -14,6 +15,11 @@ namespace Business.Constants
         public static string notReturnedYet = "Araç şuan kiralanmış durumdadır. Lütfen daha sonra tekrar deneyiniz.";
         public static string notRented = "Girilen bilgiler ile eşleşen bir kiralama verisi bulunmaktadır.";
         public static string imageLimitExceeded = "Seçili araç için yüklenebilecek resim limitine ulaştınız.";
-        internal static string fetchError = "Veriyi getirmekte sıkıntı yaşandı.";
+        public static string fetchError = "Veriyi getirmekte sıkıntı yaşandı.";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string AccessTokenCreated = "Token oluşturuldu";
+        public static string PasswordError = "Şifre hatası";
+        public static string AuthorizationDenied = "Erişim yetkisi reddedildi";
     }
 }

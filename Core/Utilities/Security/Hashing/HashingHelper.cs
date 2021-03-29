@@ -1,34 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Security.Cryptography;
 
 namespace Core.Utilities.Security.Hashing
 {
     public class HashingHelper
     {
-        //Hashleme aracı
-
-        public static void CreatePasswordHash
-            (string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            //Bu metod kendisine verilen şifre üzerinde salt işlemini gerçekleştirerek hash oluşturacak
-            //Parametre olarak istenen out dışarı verilecek
-
-            using (var hmac = new HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
-                passwordSalt = hmac.Key; //Anlık oluşturulan keydir. Her kullanıcı için farklıdır.
+                passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
 
         public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            //Parametre olarak verilen passwordü aynı salt ile hashleseydin aynı hash değerini mi elde ederdin
-            using (var hmac = new HMACSHA512(passwordSalt)) //Kullanılacak salt parametre olarak verilir..
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-
                 for (int i = 0; i < computedHash.Length; i++)
                 {
                     if (computedHash[i] != passwordHash[i])
@@ -36,7 +27,6 @@ namespace Core.Utilities.Security.Hashing
                         return false;
                     }
                 }
-
                 return true;
             }
         }

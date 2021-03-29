@@ -8,6 +8,7 @@ using Entities.DTOs;
 using System.IO;
 using Core.Entities.Concrete;
 using Business.Abstract;
+using Core.Utilities.Security.Hashing;
 
 namespace ConsoleUI
 {
@@ -18,6 +19,18 @@ namespace ConsoleUI
             //AddNewUser();
             //AddNewCustomer();
             //RentSystem();
+            //Test();
+
+            byte[] passwordHash, passwordSalt;
+            string password = "fikret123";
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var result = HashingHelper.VerifyPasswordHash("fikret123", passwordHash, passwordSalt);
+            Console.WriteLine(result);
+            Console.ReadLine();
+        }
+
+        private static void Test()
+        {
             ICarService carService = new CarManager(new EfCarDal());
             var res = carService.Add(new Car
             {
@@ -29,7 +42,6 @@ namespace ConsoleUI
                 ModelYear = 2014
             });
             Console.WriteLine(res.Success);
-            Console.ReadLine();
         }
 
         static void AddNewUser()
@@ -40,21 +52,18 @@ namespace ConsoleUI
                 FirstName = "Fikret",
                 LastName = "Gözütok",
                 Email = "fikret@mail.com",
-                Password = "123"
             });
             userManager.Add(new User
             {
                 FirstName = "İsmail",
                 LastName = "Demir",
                 Email = "ism@mail.com",
-                Password = "abc"
             });
             userManager.Add(new User
             {
                 FirstName = "Hakan",
                 LastName = "Özcan",
                 Email = "sinyor@mail.com",
-                Password = "nevarb3"
             });
         }
         static void AddNewCustomer()

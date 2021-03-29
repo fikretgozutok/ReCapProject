@@ -7,10 +7,9 @@ namespace Core.Utilities.Security.Encryption
 {
     public class SigningCredentialsHelper
     {
-        public static SigningCredentials CreateSigningCredentials(SecurityKey security)
+        public static SigningCredentials CreateSigningCredentials(SecurityKey securityKey)
         {
-            //Kullanıcı adı ve şifre bir credential dır.
-            return new SigningCredentials(security, SecurityAlgorithms.HmacSha512Signature);
+            return new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
         }
     }
 }
