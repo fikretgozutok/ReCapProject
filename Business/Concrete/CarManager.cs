@@ -27,20 +27,20 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CarValidator))]
         [TransactionScopeAspect]
-        [CacheRemoveAspect("ICarImageService.Get")]
+        [CacheRemoveAspect("ICarService.Get")]
         public override IResult Add(Car entity)
         {
             return base.Add(entity);
         }
 
-        [CacheRemoveAspect("ICarImageService.Get")]
+        [CacheRemoveAspect("ICarService.Get")]
         [TransactionScopeAspect]
         public override IResult Update(Car entity)
         {
             return base.Update(entity);
         }
 
-        [CacheRemoveAspect("ICarImageService.Get")]
+        [CacheRemoveAspect("ICarService.Get")]
         [TransactionScopeAspect]
         public override IResult Delete(Car entity)
         {
