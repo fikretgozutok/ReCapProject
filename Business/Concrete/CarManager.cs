@@ -10,6 +10,8 @@ using System.Text;
 using Core.Utilities.Results.Concrete;
 using Core.Business;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
@@ -24,23 +26,28 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(CarValidator))]
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("ICarImageService.Get")]
         public override IResult Add(Car entity)
         {
             return base.Add(entity);
         }
 
-        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarImageService.Get")]
+        [TransactionScopeAspect]
         public override IResult Update(Car entity)
         {
             return base.Update(entity);
         }
 
-        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarImageService.Get")]
+        [TransactionScopeAspect]
         public override IResult Delete(Car entity)
         {
             return base.Delete(entity);
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails(int carId)
         {
             try
@@ -53,6 +60,7 @@ namespace Business.Concrete
             }
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             try
@@ -66,6 +74,7 @@ namespace Business.Concrete
             }
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             try
@@ -79,6 +88,7 @@ namespace Business.Concrete
             }
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetAllCarsDetails()
         {
             try
